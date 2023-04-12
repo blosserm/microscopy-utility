@@ -5,4 +5,6 @@ flat field divides an image to perform flatfield collection, with a flag for pos
 
 file split is self explanatory
 
-z project and median work about how they would in imagej
+median project works about how they would in imagej
+
+The _Multi batch processing is kludgy, and should be changed for serious work
