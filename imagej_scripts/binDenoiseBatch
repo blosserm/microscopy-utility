@@ -1,0 +1,40 @@
+from ij import IJ
+from ij.plugin import Binner
+from fiji.denoise import ROF_Denoise
+from ij.io import Opener
+from ij.io import FileSaver
+import os #for making directories
+from glob import glob
+
+
+
+#.cine to your file type
+paths = glob('/Users/Matt/Documents/Data/**/**/*zproject.tif')
+#print paths
+
+opener = Opener()
+
+
+#imp = opener.openTiff('/Users/Matt/Documents/Data/2017-01-17_1-1_DiPhyPC_DPPC_OldGUV/A_1-1_DipHyPC-DPPC_133_0/A_1-1_DipHyPC-DPPC_133_0_040101_frame0.tif', 1)
+
+for i in paths:
+	fileName = i;
+	imp = opener.openImage(fileName);
+    #print imp
+	imp2 = Binner().shrink(imp, 4, 4, 1, 1)
+	ip2 = imp2.getProcessor()
+	ROF_Denoise().denoise(ip2, 12)
+	newFileName = fileName.replace('zproject', 'binned')
+	print newFileName
+	fs = FileSaver(imp2)
+	fs.saveAsTiff(newFileName)
+	
+
+
+#imp = IJ.getImage()
+
+#imp2 = Binner().shrink(imp, 4, 4, 1, 1)
+#ip2 = imp2.getProcessor()
+#ROF_Denoise().denoise(ip2, 12)
+
+#imp2.show()

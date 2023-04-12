@@ -1,0 +1,7 @@
+
+makeRectangle(0, 0, 1024, 1023);
+
+run("Crop");
+run("Bin...", "x=4 y=4 z=1 bin=Average");
+
+run("ROF Denoise", "theta=12");
